@@ -6,8 +6,12 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+const (
+	issuerString = "jwt"
+	expDuration  = 3600
+)
+
 var secretString = []byte("jwt-secret")
-var issuerString = "jwt"
 
 // UserClaims is the type contain userID and standardClaims
 type UserClaims struct {
@@ -17,7 +21,7 @@ type UserClaims struct {
 
 // New - create a token
 func New(userID string) (string, error) {
-	tokenExp := time.Now().Unix() + int64(3600)
+	tokenExp := time.Now().Unix() + int64(expDuration)
 	claims := UserClaims{
 		userID,
 		jwt.StandardClaims{

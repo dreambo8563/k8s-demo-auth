@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-auth-deployment
+  labels:
+    app: todo
+    component: todo-auth
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: todo-auth
+  template:
+    metadata:
+      labels:
+        component: todo-auth
+    spec:
+      containers:
+        - name: component
+          image: dreambo8563docker/todo-auth:v1
+          ports:
+            - containerPort: 7000

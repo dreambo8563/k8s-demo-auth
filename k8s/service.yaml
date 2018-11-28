@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: todo-auth-service
+spec:
+  type: NodePort
+  selector:
+    component: todo-auth
+  ports:
+    - protocol: TCP
+      nodePort: 30000
+      port: 6000
+      targetPort: 7000

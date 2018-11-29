@@ -22,6 +22,7 @@ func JWTNewTokenHandler(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&reqParams); err != nil {
 		// params err
+		log.Sugar().Warn("JWTNewTokenHandler params err", reqParams)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"msg": err.Error(),
 		})

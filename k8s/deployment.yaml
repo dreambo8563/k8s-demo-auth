@@ -20,3 +20,11 @@ spec:
           image: dreambo8563docker/todo-auth:v1
           ports:
             - containerPort: 7000
+          volumeMounts:
+            - mountPath: /k8slog
+              name: k8slog
+      volumes:
+        - name: k8slog
+          hostPath:
+            path: /Users/vincent/Documents/Golang/logs
+            type: DirectoryOrCreates

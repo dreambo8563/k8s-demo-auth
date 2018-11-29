@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: component
-          image: dreambo8563docker/todo-auth:v1
+          image: dreambo8563docker/todo-auth:v2
           ports:
             - containerPort: 7000
           volumeMounts:
@@ -27,4 +27,4 @@ spec:
         - name: k8slog
           hostPath:
             path: /Users/vincent/Documents/Golang/logs
-            type: DirectoryOrCreates
+            type: DirectoryOrCreate

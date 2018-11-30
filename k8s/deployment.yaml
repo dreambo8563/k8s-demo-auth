@@ -16,7 +16,7 @@ spec:
         component: todo-auth
     spec:
       containers:
-        - name: component
+        - name: todo-auth
           image: dreambo8563docker/todo-auth:v2
           ports:
             - containerPort: 7000

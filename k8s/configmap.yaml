@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: todo-auth-config
-  namespace: default
-data:
-  SERVICE_NAME: todo-auth-service
-  SERVICE_PORT: "6000"

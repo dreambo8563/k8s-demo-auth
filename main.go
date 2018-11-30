@@ -10,5 +10,6 @@ func main() {
 
 	r := gin.Default()
 	r.POST("/api/auth/login", controllers.JWTNewTokenHandler)
+	r.GET("/healthz", controllers.HealthCheckHandler)
 	r.Run(":7000") // listen and serve on 0.0.0.0:7000
 }

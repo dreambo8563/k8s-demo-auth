@@ -5,14 +5,10 @@ import (
 
 	"go.uber.org/zap"
 
-	"vincent.com/auth/services/logger"
-
 	"vincent.com/auth/services/jwt"
 
 	"github.com/gin-gonic/gin"
 )
-
-var log = logger.Logger
 
 // JWTNewTokenHandler - new token handler
 func JWTNewTokenHandler(c *gin.Context) {

@@ -1,9 +1,11 @@
 package jwt
 
 import (
+	"context"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	opentracing "github.com/opentracing/opentracing-go"
 )
 
 const (
@@ -20,7 +22,10 @@ type UserClaims struct {
 }
 
 // New - create a token
-func New(userID string) (string, error) {
+func New(ctx context.Context, userID string) (string, error) {
+	span, _ := opentracing.StartSpanFromContext(ctx, "NewToken")
+	defer span.Finish()
+
 	tokenExp := time.Now().Unix() + int64(expDuration)
 	claims := UserClaims{
 		userID,
@@ -30,6 +35,8 @@ func New(userID string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	span.LogKV("event", "NewWithClaims")
 	ss, err := token.SignedString(secretString)
+	span.LogKV("event", "SignedString")
 	return ss, err
 }

@@ -5,6 +5,8 @@ import (
 	"net"
 	"net/http"
 
+	"vincent.com/auth/services/tracing"
+
 	"vincent.com/auth/rpc/helloworld"
 
 	"google.golang.org/grpc"
@@ -25,6 +27,8 @@ type server struct{}
 
 // HealthCheckHandler - health check handler
 func HealthCheckHandler(c *gin.Context) {
+	span := tracing.Tracer.StartSpan("HealthCheckHandler")
+	defer span.Finish()
 	// success
 	c.JSON(http.StatusOK, "ok")
 }

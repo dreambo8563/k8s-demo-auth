@@ -37,6 +37,4 @@ func init() {
 		panic(err)
 	}
 	defer Logger.Sync()
-
-	Logger.Info("logger construction succeeded")
 }

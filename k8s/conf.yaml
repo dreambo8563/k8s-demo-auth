@@ -4,8 +4,8 @@ metadata:
   name: todo-auth-config
   namespace: default
 data:
-  SERVICE_NAME: todo-auth-service
-  SERVICE_PORT: "6000"
+  AUTH_SERVICE_URL: "todo-auth-service:6000"
+  AUTH_RPC_SERVICE_URL: "todo-auth-service:50051"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -26,9 +26,10 @@ spec:
     spec:
       containers:
         - name: todo-auth-pod
-          image: dreambo8563docker/todo-auth:v4
+          image: dreambo8563docker/todo-auth:v8
           ports:
             - containerPort: 7000
+            - containerPort: 50051
           volumeMounts:
             - mountPath: /k8slog
               name: k8slog
@@ -59,7 +60,12 @@ spec:
   selector:
     component: todo-auth
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       nodePort: 30000
       port: 6000
       targetPort: 7000
+    - name: rpc
+      protocol: TCP
+      port: 50051
+      targetPort: 50051

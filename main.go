@@ -12,7 +12,7 @@ func main() {
 	defer tracing.Closer.Close()
 
 	r := gin.Default()
-	go controllers.InitRPCServer()
+	go controllers.InitRPCServer(tracing.Tracer)
 	r.POST("/api/auth/login", controllers.JWTNewTokenHandler)
 	r.GET("/healthz", controllers.HealthCheckHandler)
 	r.Run(":7000") // listen and serve on 0.0.0.0:7000

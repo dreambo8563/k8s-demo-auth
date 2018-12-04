@@ -15,7 +15,7 @@ var (
 	rawJSON = []byte(`{
 		"level": "debug",
 		"encoding": "json",
-		"outputPaths": ["stdout", "/k8slog/auth-log"],
+		"outputPaths": ["stdout", "./auth-log"],
 		"errorOutputPaths": ["stderr"],
 		"initialFields": {"service": "todo-auth"},
 		"encoderConfig": {

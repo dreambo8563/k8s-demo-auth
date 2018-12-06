@@ -7,9 +7,11 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 	opentracing "github.com/opentracing/opentracing-go"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"vincent.com/auth/rpc/helloworld"
+	"vincent.com/auth/services/jwt"
 	"vincent.com/auth/services/logger"
 	"vincent.com/auth/services/tracing"
 
@@ -53,7 +55,17 @@ func InitRPCServer(tracer opentracing.Tracer) {
 
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
-	span, _ := opentracing.StartSpanFromContext(ctx, "SayHello")
+	span, childCtx := opentracing.StartSpanFromContext(ctx, "SayHello")
 	defer span.Finish()
-	return &helloworld.HelloReply{Message: "Hello " + in.Name}, nil
+	span.SetTag("UID", in.Name)
+	token, err := jwt.New(childCtx, in.Name)
+	if err != nil {
+		// jwt err
+		span.LogKV("event", "jwt err", "err", err)
+		log.Error("generate token err", zap.String("error", err.Error()))
+
+		return nil, err
+	}
+	span.LogKV("event", "jwt success", "token", token)
+	return &helloworld.HelloReply{Message: "Hello " + token}, nil
 }

@@ -1,2 +1,0 @@
-{"level":"info","timestamp":"2018-12-04T18:38:25.229+0800","message":"get reqParams","service":"todo-auth","params":{"id":"8508259415674504124"}}
-{"level":"info","timestamp":"2018-12-04T18:38:25.229+0800","message":"receive token","service":"todo-auth","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI4NTA4MjU5NDE1Njc0NTA0MTI0IiwiZXhwIjoxNTQzOTIzNTA1LCJpc3MiOiJqd3QifQ.MBNx7nDE-P5iqEOKyLu2jDoXuWN_Fntx0Sw5MJA2yQQ"}

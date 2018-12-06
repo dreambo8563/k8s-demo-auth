@@ -26,13 +26,16 @@ spec:
     spec:
       containers:
         - name: todo-auth-pod
-          image: dreambo8563docker/todo-auth:v8
+          image: dreambo8563docker/todo-auth:v10
           ports:
             - containerPort: 7000
             - containerPort: 50051
           volumeMounts:
             - mountPath: /k8slog
               name: k8slog
+          envFrom:
+            - configMapRef:
+                name: jaeger-configuration
           livenessProbe:
             httpGet:
               path: /healthz

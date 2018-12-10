@@ -13,7 +13,6 @@ import (
 	"vincent.com/auth/rpc/helloworld"
 	"vincent.com/auth/services/jwt"
 	"vincent.com/auth/services/logger"
-	"vincent.com/auth/services/tracing"
 
 	"github.com/gin-gonic/gin"
 )
@@ -29,8 +28,8 @@ type server struct{}
 
 // HealthCheckHandler - health check handler
 func HealthCheckHandler(c *gin.Context) {
-	span := tracing.Tracer.StartSpan("HealthCheckHandler")
-	defer span.Finish()
+	// span := tracing.Tracer.StartSpan("HealthCheckHandler")
+	// defer span.Finish()
 	// success
 	c.JSON(http.StatusOK, "ok")
 }

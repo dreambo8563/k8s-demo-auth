@@ -4,7 +4,7 @@ metadata:
   name: todo-auth-config
   namespace: default
 data:
-  AUTH_SERVICE_URL: "todo-auth-service:6000"
+  AUTH_SERVICE_URL: "todo-auth-service:7000"
   AUTH_RPC_SERVICE_URL: "todo-auth-service:50051"
 ---
 apiVersion: apps/v1
@@ -59,14 +59,14 @@ apiVersion: v1
 metadata:
   name: todo-auth-service
 spec:
-  type: NodePort
+  type: ClusterIP
+  clusterIP: None
   selector:
     component: todo-auth
   ports:
     - name: http
       protocol: TCP
-      nodePort: 30000
-      port: 6000
+      port: 7000
       targetPort: 7000
     - name: rpc
       protocol: TCP

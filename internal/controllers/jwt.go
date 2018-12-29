@@ -10,8 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
-	"vincent.com/auth/services/jwt"
-	"vincent.com/auth/services/tracing"
+	"vincent.com/auth/internal/pkg/jwt"
+	"vincent.com/auth/internal/pkg/tracing"
 )
 
 // JWTNewTokenHandler - new token handler

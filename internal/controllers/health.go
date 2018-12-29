@@ -10,9 +10,9 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"vincent.com/auth/rpc/auth"
-	"vincent.com/auth/services/jwt"
-	"vincent.com/auth/services/logger"
+	"vincent.com/auth/internal/pkg/jwt"
+	"vincent.com/auth/internal/pkg/logger"
+	"vincent.com/auth/internal/rpc/auth"
 
 	"github.com/gin-gonic/gin"
 )

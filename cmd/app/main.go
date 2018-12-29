@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"vincent.com/auth/controllers"
-	"vincent.com/auth/services/tracing"
+	"vincent.com/auth/internal/controllers"
+	"vincent.com/auth/internal/pkg/tracing"
 )
 
 func main() {

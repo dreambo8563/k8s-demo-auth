@@ -21,7 +21,7 @@ const (
 	port = ":50051"
 )
 
-var log = logger.Logger
+var log = logger.Logger()
 
 // server is used to implement helloworld.GreeterServer.
 type server struct{}

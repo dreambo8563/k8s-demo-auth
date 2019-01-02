@@ -8,12 +8,11 @@ import (
 
 func main() {
 	// gin.SetMode(gin.ReleaseMode)
-	tracing.Init("todo-auth-service")
-	defer tracing.Closer.Close()
+	traceClient := tracing.NewTraceClient()
+	defer traceClient.Closer.Close()
 
 	r := gin.Default()
-	go controllers.InitRPCServer(tracing.Tracer)
-	r.POST("/api/auth/login", controllers.JWTNewTokenHandler)
+	go controllers.InitRPCServer(traceClient.GetTracer())
 	r.GET("/healthz", controllers.HealthCheckHandler)
 	r.Run(":7000") // listen and serve on 0.0.0.0:7000
 }

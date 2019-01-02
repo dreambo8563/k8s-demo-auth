@@ -27,6 +27,9 @@ spec:
       containers:
         - name: todo-auth-pod
           image: dreambo8563docker/todo-auth:v12
+          env:
+            - name: JAEGER_SERVICE_NAME
+              value: todo-auth-service
           ports:
             - containerPort: 7000
             - containerPort: 50051

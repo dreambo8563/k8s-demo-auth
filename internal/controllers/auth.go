@@ -4,13 +4,16 @@ import (
 	"context"
 	"net"
 
+	"vincent.com/auth/internal/domain/usecase"
+
+	"vincent.com/auth/internal/adapter/service"
+
 	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
 
 	opentracing "github.com/opentracing/opentracing-go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"vincent.com/auth/internal/pkg/jwt"
-	"vincent.com/auth/internal/rpc/auth"
+	"vincent.com/auth/internal/adapter/http/rpc/auth"
 )
 
 // JWTNewTokenHandler - new token handler
@@ -77,7 +80,11 @@ func (s *server) GetToken(ctx context.Context, in *auth.GetTokenRequest) (*auth.
 	span, childCtx := opentracing.StartSpanFromContext(ctx, "SayHello")
 	defer span.Finish()
 	span.SetTag("UID", in.Uid)
-	token, err := jwt.New(childCtx, in.Uid)
+	authcase := service.InitializeAuthCase()
+
+	token, err := authcase.NewToken(childCtx, &usecase.User{
+		ID: in.Uid,
+	})
 	if err != nil {
 		// jwt err
 		span.LogKV("event", "jwt err", "err", err)

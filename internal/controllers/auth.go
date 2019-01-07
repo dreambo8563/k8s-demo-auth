@@ -93,5 +93,5 @@ func (s *server) GetToken(ctx context.Context, in *auth.GetTokenRequest) (*auth.
 		return nil, err
 	}
 	span.LogKV("event", "jwt success", "token", token)
-	return &auth.GetTokenReply{Token: "Hello " + token}, nil
+	return &auth.GetTokenReply{Token: token}, nil
 }

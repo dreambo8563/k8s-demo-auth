@@ -36,8 +36,25 @@ func (a *AuthUsecase) NewToken(ctx context.Context, u *User) (token string, err 
 	return token, nil
 }
 
+//ParseToken -
+func (a *AuthUsecase) ParseToken(ctx context.Context, t string) (u *User, err error) {
+
+	user, err := a.repo.ParseToken(ctx, t)
+	if err != nil {
+		return nil, err
+	}
+
+	return fromUser(user), nil
+}
+
 func toUser(u *User) *model.User {
 	return &model.User{
+		ID: u.ID,
+	}
+}
+
+func fromUser(u *model.User) *User {
+	return &User{
 		ID: u.ID,
 	}
 }

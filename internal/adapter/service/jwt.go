@@ -25,3 +25,14 @@ func NewAuthRepository() *AuthRepository {
 func (a *AuthRepository) NewToken(ctx context.Context, u *model.User) (token string, err error) {
 	return jwt.New(ctx, u.GetID())
 }
+
+//ParseToken -
+func (a *AuthRepository) ParseToken(ctx context.Context, t string) (u *model.User, err error) {
+	uid, err := jwt.Parse(ctx, t)
+	if err != nil {
+		return nil, err
+	}
+	return &model.User{
+		ID: uid,
+	}, nil
+}

@@ -10,7 +10,7 @@ import (
 
 const (
 	issuerString = "jwt"
-	expDuration  = 3600
+	expDuration  = 60
 )
 
 var secretString = []byte("jwt-secret")
@@ -39,4 +39,19 @@ func New(ctx context.Context, userID string) (string, error) {
 	ss, err := token.SignedString(secretString)
 	span.LogKV("event", "SignedString")
 	return ss, err
+}
+
+//Parse -
+func Parse(ctx context.Context, token string) (string, error) {
+	span, _ := opentracing.StartSpanFromContext(ctx, "Parse")
+	defer span.Finish()
+
+	t, err := jwt.ParseWithClaims(token, &UserClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return secretString, nil
+	})
+
+	if claims, ok := t.Claims.(*UserClaims); ok && t.Valid {
+		return claims.UserID, nil
+	}
+	return "", err
 }

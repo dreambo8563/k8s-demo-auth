@@ -95,3 +95,17 @@ func (s *server) GetToken(ctx context.Context, in *auth.GetTokenRequest) (*auth.
 	span.LogKV("event", "jwt success", "token", token)
 	return &auth.GetTokenReply{Token: token}, nil
 }
+
+// SayHello implements helloworld.GreeterServer
+func (s *server) ParseToken(ctx context.Context, in *auth.ParseTokenRequest) (*auth.ParseTokenReply, error) {
+	span, childCtx := opentracing.StartSpanFromContext(ctx, "SayHello")
+	defer span.Finish()
+	authcase := service.InitializeAuthCase()
+
+	user, err := authcase.ParseToken(childCtx, in.Token)
+	if err != nil {
+		// jwt err
+		return nil, err
+	}
+	return &auth.ParseTokenReply{Id: user.ID}, nil
+}

@@ -9,4 +9,5 @@ import (
 //AuthRepository - User repo interface
 type AuthRepository interface {
 	NewToken(context.Context, *model.User) (token string, err error)
+	ParseToken(context.Context, string) (*model.User, error)
 }

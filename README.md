@@ -2,6 +2,7 @@
 [![CircleCI](https://circleci.com/gh/dreambo8563/k8s-demo-auth.svg?style=svg)](https://circleci.com/gh/dreambo8563/k8s-demo-auth)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GolangCI](https://golangci.com/badges/github.com/golangci/golangci-lint.svg)](https://golangci.com)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dreambo8563/k8s-demo-auth)](https://goreportcard.com/report/github.com/dreambo8563/k8s-demo-auth)
 
 # k8s-demo-auth
 

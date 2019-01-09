@@ -9,3 +9,4 @@
 ## API
 
 - /api/auth/login generate token by user id
+  test

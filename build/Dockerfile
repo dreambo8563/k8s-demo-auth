@@ -5,7 +5,7 @@ WORKDIR /auth
 COPY . ./
 
 # Building using -mod=vendor, which will utilize the v
-RUN  && CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o /src/cmd/app/app /src/cmd/app
+RUN CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o /src/cmd/app/app /src/cmd/app
 
 FROM alpine:3.8
 

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 
 	"vincent.com/auth/internal/pkg/jwt"
 
@@ -30,7 +31,10 @@ func (a *AuthRepository) NewToken(ctx context.Context, u *model.User) (token str
 func (a *AuthRepository) ParseToken(ctx context.Context, t string) (u *model.User, err error) {
 	uid, err := jwt.Parse(ctx, t)
 	if err != nil {
-		return nil, err
+		if jwt.IsExpired(err) {
+			return nil, errors.New("token is Expired")
+		}
+		return nil, errors.New("token is Malformed")
 	}
 	return &model.User{
 		ID: uid,

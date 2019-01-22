@@ -1,6 +1,6 @@
 FROM golang:1.11.2-stretch as builder
 
-WORKDIR /auth
+WORKDIR /src
 
 COPY . ./
 
@@ -13,6 +13,6 @@ WORKDIR /root/
 
 RUN mkdir /k8slog
 
-COPY --from=builder /auth/cmd/app/app .
+COPY --from=builder /src/cmd/app/app .
 
 CMD ["./app"]

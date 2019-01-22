@@ -15,7 +15,7 @@ metadata:
     app: todo
     component: todo-auth
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       component: todo-auth
@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: todo-auth-pod
-          image: dreambo8563docker/todo-auth:v12
+          image: dreambo8563docker/todo-auth:v13
           env:
             - name: JAEGER_SERVICE_NAME
               value: todo-auth-service
